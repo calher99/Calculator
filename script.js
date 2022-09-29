@@ -31,3 +31,11 @@ function operate (operator,a,b){
             break;
     }
 }
+
+const buttons = document.querySelectorAll('button');
+console.log(buttons);
+buttons.forEach (btn => btn.addEventListener('click', printScreen));
+
+function printScreen(e){
+    console.log(e.target.innerText);
+}
