@@ -2,14 +2,24 @@
 .calculator{
     display: flex;
     flex-direction: column;
-    background-color: black;
     width: 500px;
+    border: black solid 1px;
+    
 }
 
 button {
-    width: 150px;
+    width: 100px;
     height: 100px;
+    font-size: 20px;
 }
 .display {
     height: 150px;
+    border: black solid 4px;
+}
+
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
 }
