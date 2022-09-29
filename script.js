@@ -36,6 +36,20 @@ const buttons = document.querySelectorAll('button');
 console.log(buttons);
 buttons.forEach (btn => btn.addEventListener('click', printScreen));
 
+
+
+// Display
+
 function printScreen(e){
-    console.log(e.target.innerText);
+    if(e.target.innerText === 'CLEAR'){
+        clearScreen();
+    }else{
+        const div= document.querySelector('.display');
+        div.textContent+=e.target.innerText;
+    }
+}
+
+function clearScreen(){
+    const div= document.querySelector('.display');
+    div.textContent='';
 }
