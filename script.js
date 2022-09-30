@@ -33,20 +33,46 @@ function operate (operator,a,b){
 }
 
 const buttons = document.querySelectorAll('button');
-console.log(buttons);
 buttons.forEach (btn => btn.addEventListener('click', printScreen));
 
-
-
-// Display
-
 function printScreen(e){
-    if(e.target.innerText === 'CLEAR'){
-        clearScreen();
+    const div= document.querySelector('.display');
+    const displayContent= div.textContent;
+    console.log(div.textContent);
+    if (displayContent ==='') {
+        if(e.target.innerText === 'CLEAR' || e.target.innerText === '+' || e.target.innerText === '-' || e.target.innerText === '*' || e.target.innerText === '/' || e.target.innerText === '='){
+            clearScreen();
+        }else{
+            div.textContent+=e.target.innerText;
+        } 
     }else{
-        const div= document.querySelector('.display');
-        div.textContent+=e.target.innerText;
+        if(e.target.innerText === 'CLEAR'){
+            clearScreen();
+        }else{
+           
+            switch(e.target.innerText){
+                case "+":
+                    clearScreen()
+                    break;
+                case '-':
+                    clearScreen()
+                    break;
+                case '*':
+                    clearScreen()
+                    break;
+                case '/':
+                    clearScreen()
+                    break;
+                case "=":
+                    clearScreen()
+                    break;
+                default:
+                    div.textContent+=e.target.innerText;
+            } 
+        }
     }
+
+    
 }
 
 function clearScreen(){
