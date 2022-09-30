@@ -32,8 +32,33 @@ function operate (operator,a,b){
     }
 }
 
-const buttons = document.querySelectorAll('button');
+
+const buttons = document.querySelectorAll('.number');
 buttons.forEach (btn => btn.addEventListener('click', printScreen));
+const div= document.querySelector('.display');
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', clearScreen);
+const equal = document.querySelector('.equal');
+equal.addEventListener('click', equalScreen);
+const operators = document.querySelectorAll('.operator');
+operators.forEach (op => op.addEventListener('click', operationScreen));
+
+function printScreen(e){
+    div.textContent+=e.target.innerText;  
+}
+
+function clearScreen(){
+    div.textContent='';
+}
+function equalScreen() {
+    console.log(div.textContent);
+}
+function operationScreen(e){
+    console.log("tonto"); 
+}
+
+
+/*
 
 function printScreen(e){
     const div= document.querySelector('.display');
@@ -78,3 +103,5 @@ function clearScreen(){
     const div= document.querySelector('.display');
     div.textContent='';
 }
+
+*/
