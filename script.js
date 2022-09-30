@@ -49,7 +49,6 @@ function printScreen(e){
         if(e.target.innerText === 'CLEAR'){
             clearScreen();
         }else{
-           
             switch(e.target.innerText){
                 case "+":
                     clearScreen()
