@@ -1,6 +1,8 @@
 //Calculation functions
 
 function add(a,b) {
+    console.log(a);
+    console.log(b);
     return a+b;
 } 
 function substract(a,b) {
@@ -27,7 +29,11 @@ function operate (operator,a,b){
             return multiply(a,b);
             break;
         case '/':
-            return divide(a,b);
+            if(b===0){
+                return 0;
+            }else{
+                return divide(a,b);
+            }
             break;
     }
 }
@@ -38,8 +44,6 @@ buttons.forEach (btn => btn.addEventListener('click', printScreen));
 const div= document.querySelector('.display');
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', clearScreen);
-const equal = document.querySelector('.equal');
-equal.addEventListener('click', equalScreen);
 const operators = document.querySelectorAll('.operator');
 operators.forEach (op => op.addEventListener('click', operationScreen));
 let clearContent = false;
@@ -60,27 +64,21 @@ function clearScreen(){
     previousValue = '';
     clearContent = false;
 }
-function equalScreen(e) {
-    clearContent = true;
-    if (previousValue===''){
-        previousValue=div.textContent;
-        previousOperator=e.target.innerText;
-    }else{
-        const operationResult = operate(previousOperator, parseInt(previousValue),parseInt(div.textContent));
-        previousValue = operationResult;
-        previousOperator=e.target.innerText;
-        div.textContent=operationResult;
-    }
-}
+
 function operationScreen(e){
     clearContent = true;
     if (previousValue==='' || previousOperator === "="){
         previousValue=div.textContent;
         previousOperator=e.target.innerText;
     }else{
-        const operationResult = operate(previousOperator, parseInt(previousValue),parseInt(div.textContent));
+        console.log(previousValue);
+        console.log(div.textContent);
+        //Creo que al hacer parseINT esta redondeando al integer
+        const operationResult = Math.round(operate(previousOperator, parseFloat(previousValue),parseFloat(div.textContent))*100)/100;
+        
         previousValue = operationResult;
         previousOperator=e.target.innerText;
+        
         div.textContent=operationResult;
     }
 }
