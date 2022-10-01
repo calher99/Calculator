@@ -42,22 +42,26 @@ const equal = document.querySelector('.equal');
 equal.addEventListener('click', equalScreen);
 const operators = document.querySelectorAll('.operator');
 operators.forEach (op => op.addEventListener('click', operationScreen));
+let clearContent = false;
 let previousValue='';
 let previousOperator ='';
 
 function printScreen(e){
-    div.textContent+=e.target.innerText;  
+    if (clearContent){
+        div.textContent=e.target.innerText;
+        clearContent=false;
+    }else{
+        div.textContent+=e.target.innerText;  
+    } 
 }
 
 function clearScreen(){
     div.textContent='';
     previousValue = '';
+    clearContent = false;
 }
-function equalScreen() {
-    console.log(div.textContent);
-}
-function operationScreen(e){
-    
+function equalScreen(e) {
+    clearContent = true;
     if (previousValue===''){
         previousValue=div.textContent;
         previousOperator=e.target.innerText;
@@ -66,9 +70,19 @@ function operationScreen(e){
         previousValue = operationResult;
         previousOperator=e.target.innerText;
         div.textContent=operationResult;
-
     }
-   
+}
+function operationScreen(e){
+    clearContent = true;
+    if (previousValue==='' || previousOperator === "="){
+        previousValue=div.textContent;
+        previousOperator=e.target.innerText;
+    }else{
+        const operationResult = operate(previousOperator, parseInt(previousValue),parseInt(div.textContent));
+        previousValue = operationResult;
+        previousOperator=e.target.innerText;
+        div.textContent=operationResult;
+    }
 }
 
 
