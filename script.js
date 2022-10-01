@@ -42,6 +42,8 @@ const equal = document.querySelector('.equal');
 equal.addEventListener('click', equalScreen);
 const operators = document.querySelectorAll('.operator');
 operators.forEach (op => op.addEventListener('click', operationScreen));
+let previousValue='';
+let previousOperator ='';
 
 function printScreen(e){
     div.textContent+=e.target.innerText;  
@@ -49,12 +51,24 @@ function printScreen(e){
 
 function clearScreen(){
     div.textContent='';
+    previousValue = '';
 }
 function equalScreen() {
     console.log(div.textContent);
 }
 function operationScreen(e){
-    console.log("tonto"); 
+    
+    if (previousValue===''){
+        previousValue=div.textContent;
+        previousOperator=e.target.innerText;
+    }else{
+        const operationResult = operate(previousOperator, parseInt(previousValue),parseInt(div.textContent));
+        previousValue = operationResult;
+        previousOperator=e.target.innerText;
+        div.textContent=operationResult;
+
+    }
+   
 }
 
 
