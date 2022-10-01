@@ -1,8 +1,6 @@
 //Calculation functions
 
 function add(a,b) {
-    console.log(a);
-    console.log(b);
     return a+b;
 } 
 function substract(a,b) {
@@ -38,17 +36,25 @@ function operate (operator,a,b){
     }
 }
 
+//Program
 
 const buttons = document.querySelectorAll('.number');
 buttons.forEach (btn => btn.addEventListener('click', printScreen));
 const div= document.querySelector('.display');
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', clearScreen);
+const decimal = document.querySelector('.decimal');
+decimal.addEventListener('click', addDecimal);
+const erase = document.querySelector('.erase');
+erase.addEventListener('click', eraseInScreen);
 const operators = document.querySelectorAll('.operator');
 operators.forEach (op => op.addEventListener('click', operationScreen));
 let clearContent = false;
 let previousValue='';
 let previousOperator ='';
+
+
+//Screen funtions
 
 function printScreen(e){
     if (clearContent){
@@ -71,19 +77,21 @@ function operationScreen(e){
         previousValue=div.textContent;
         previousOperator=e.target.innerText;
     }else{
-        console.log(previousValue);
-        console.log(div.textContent);
-        //Creo que al hacer parseINT esta redondeando al integer
         const operationResult = Math.round(operate(previousOperator, parseFloat(previousValue),parseFloat(div.textContent))*100)/100;
-        
         previousValue = operationResult;
         previousOperator=e.target.innerText;
-        
         div.textContent=operationResult;
     }
 }
 
+function eraseInScreen (){
+    const newScreenValue = div.textContent.slice(0,-1);
+    div.textContent = newScreenValue;
+}
 
+function addDecimal () {
+    div.textContent += '.';
+}
 /*
 
 function printScreen(e){
