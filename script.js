@@ -49,10 +49,18 @@ const erase = document.querySelector('.erase');
 erase.addEventListener('click', eraseInScreen);
 const operators = document.querySelectorAll('.operator');
 operators.forEach (op => op.addEventListener('click', operationScreen));
+//Global variables for storing data
 let clearContent = false;
 let previousValue='';
 let previousOperator ='';
 
+window.addEventListener('keydown', function(e){
+    if(e.keyCode < 48 || e.keyCode > 57){
+        return;
+    }
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
+    key.click();
+});
 
 //Screen funtions
 
@@ -87,55 +95,13 @@ function operationScreen(e){
 function eraseInScreen (){
     const newScreenValue = div.textContent.slice(0,-1);
     div.textContent = newScreenValue;
+    clearContent=false;
 }
 
 function addDecimal () {
-    div.textContent += '.';
-}
-/*
-
-function printScreen(e){
-    const div= document.querySelector('.display');
-    const displayContent= div.textContent;
-    console.log(div.textContent);
-    if (displayContent ==='') {
-        if(e.target.innerText === 'CLEAR' || e.target.innerText === '+' || e.target.innerText === '-' || e.target.innerText === '*' || e.target.innerText === '/' || e.target.innerText === '='){
-            clearScreen();
-        }else{
-            div.textContent+=e.target.innerText;
-        } 
-    }else{
-        if(e.target.innerText === 'CLEAR'){
-            clearScreen();
-        }else{
-            switch(e.target.innerText){
-                case "+":
-                    clearScreen()
-                    break;
-                case '-':
-                    clearScreen()
-                    break;
-                case '*':
-                    clearScreen()
-                    break;
-                case '/':
-                    clearScreen()
-                    break;
-                case "=":
-                    clearScreen()
-                    break;
-                default:
-                    div.textContent+=e.target.innerText;
-            } 
-        }
+    if (div.textContent.includes('.')){
+        return;
     }
-
-    
+    div.textContent += '.';
+    clearContent=false;
 }
-
-function clearScreen(){
-    const div= document.querySelector('.display');
-    div.textContent='';
-}
-
-*/
