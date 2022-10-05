@@ -42,3 +42,7 @@ button {
     gap: 5px;
     padding: 15px;
 }
+
+button.operator:focus {
+    background-color: lightskyblue;
+}
